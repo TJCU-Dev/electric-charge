@@ -1,15 +1,17 @@
 const request = require('superagent');
 const fs = require('fs')
-
+const async = require('async');
 
 // 生成 Buildinglist.json 楼列表id
 function Buildinglist_put() {
+
   var Buildinglist = {
     id: [],
     name: [],
     toname: {},
     toid: {}
   }
+
   request
     .get('http://172.16.0.3/info/findBuilding.action')
     .end((err, res) => {
@@ -66,9 +68,11 @@ function roomlist() {
   }
 
   Buildinglist.name.map((name) => {
+
     var name = name,
       id = Buildinglist.toid[name],
       maxfloor = floorlist.idto[id];
+
     for (var floor = 1; floor <= maxfloor; floor++) {
       request
         .get('http://172.16.0.3/info/findRoomByBuildingMsg.action?buildingId=' + id + '&buildingFloor=' + floor)
@@ -102,4 +106,53 @@ function roomlist() {
   })
 }
 
-roomlist()
+// roomlist()
+function equipment(){
+  const roomlist = require('./roomlist.json').name
+  var equipmentlist = {}
+  var outlist = []
+  Object.keys(roomlist).map((name)=>{
+    equipmentlist[name] = {}
+    Object.keys(roomlist[name].idto).map((id)=>{
+      var list = [];
+      var room = roomlist[name].idto[id];
+      list.push(name)
+      list.push(id)
+      list.push(room)
+      outlist.push(list)
+    })
+  })
+
+
+  async.mapLimit(outlist, 300, function (a, callback) {
+    var name = a[0], id = a[1], room = a[2]
+    request
+      .get('http://172.16.0.3/info/equipmentTree.action?roomId=' + id.toString())
+      .end((err, res) => {
+        callback(null)
+        console.log(name+'-'+room+'-'+id)
+        if(!typeof(obj)=="object" ){
+          console.log(res)
+          console.log('http返回出错')
+          return
+        }
+        if(!res.hasOwnProperty('body')) {
+          console.log('错误'+id)
+          console.log(res)
+          return
+        }
+
+         equipmentlist[name][room]=res.body[0]
+         fs.writeFileSync('./equipment.json', JSON.stringify(equipmentlist), function(err) {
+           if (err) throw err;
+           console.log('has finished');
+         });
+      })
+
+  }, function (err, result) {
+    console.log('final:');
+  });
+
+
+}
+equipment()
