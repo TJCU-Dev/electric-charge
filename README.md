@@ -18,7 +18,15 @@
 * 查询电表电费 `POST`  http://172.16.0.3/info/findSurplusElectricByMeterSearchPower.action `x-www-from` 参赛 `equipmentInfoId`: `电表编号`
 
 ---
+## 使用
+---
+项目会提供静态json文件和其余功能代码以及在线的api测试接口
+#### json
+* `./Buildinglist.json` 楼列表
+* `./floorlist.json` 楼层信息
+* `./roomlist.json` 对应的房间id
 
+---
 ## 思路
 ---
 
@@ -29,3 +37,7 @@
 * 增加转发查询电费接口  
 * 定时批量查询
 * 根据查询信息对电费波动进行分析
+
+## 开发环境
+---
+node v7.1.0

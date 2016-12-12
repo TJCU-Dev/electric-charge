@@ -1,0 +1,19 @@
+{
+  "name": "electric-charge",
+  "version": "1.0.0",
+  "description": "--- >天津商业大学 电费 查询 api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TJCU-Dev/electric-charge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TJCU-Dev/electric-charge/issues"
+  },
+  "homepage": "https://github.com/TJCU-Dev/electric-charge#readme"
+}
