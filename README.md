@@ -16,6 +16,7 @@
 * 查询 电表编号 `GET` http://172.16.0.3/info/equipmentTree.action?roomId=`房间id`
 
 * 查询电表电费 `POST`  http://172.16.0.3/info/findSurplusElectricByMeterSearchPower.action `x-www-from` 参赛 `equipmentInfoId`: `电表编号`
+
 ---
 
 ## 思路
