@@ -25,6 +25,7 @@
 * `./Buildinglist.json` 楼列表
 * `./floorlist.json` 楼层信息
 * `./roomlist.json` 对应的房间id
+* `./equipment.json`  具体到设备的数据 可以直接从学校接口获取当前电费信息
 
 ---
 ## 思路
